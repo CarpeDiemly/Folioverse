@@ -33,8 +33,8 @@
     <span>Folioverse<span class="brand-dot">.</span></span>
   </a>
   <nav class="nav-links" aria-label="主导航">
-    <a href="#features">角落</a>
-    <a href="#moments">拾光</a>
+    <a href="./journal.html">日志</a>
+    <a href="./photos.html">照片墙</a>
     <a href="#about">关于</a>
     <button class="theme-toggle" type="button" aria-label="切换深浅色模式" title="切换深浅色模式">
       <span class="theme-icon" aria-hidden="true">◐</span>
@@ -84,11 +84,11 @@
   <section class="features section-wrap" id="features" aria-labelledby="features-title">
     <div class="section-heading">
       <div><p class="eyebrow">A FEW DOORS TO OPEN</p><h2 id="features-title">小站的其他角落</h2></div>
-      <p class="section-note">有几扇门还在装修，<br>不过可以先来敲一敲。</p>
+      <p class="section-note">三扇门现在都开着，<br>随便推开一扇看看。</p>
     </div>
 
     <div class="feature-grid reveal">
-      <button class="feature-card" type="button" data-kind="journal" data-feature="我的日志">
+      <a class="feature-card" href="./journal.html" data-kind="journal">
         <span class="feature-top">
           <span class="feature-no">01</span>
           <svg class="feature-icon" viewBox="0 0 24 24" aria-hidden="true">
@@ -100,12 +100,12 @@
         <span class="feature-title">我的日志</span>
         <span class="feature-desc">更长的句子、更慢的心情，都放在这里。</span>
         <span class="feature-foot">
-          <span class="feature-badge">即将上线</span>
+          <span class="feature-badge feature-badge--live">已上线</span>
           <span class="feature-arrow" aria-hidden="true">→</span>
         </span>
-      </button>
+      </a>
 
-      <button class="feature-card" type="button" data-kind="photos" data-feature="照片墙">
+      <a class="feature-card" href="./photos.html" data-kind="photos">
         <span class="feature-top">
           <span class="feature-no">02</span>
           <svg class="feature-icon" viewBox="0 0 24 24" aria-hidden="true">
@@ -118,10 +118,10 @@
         <span class="feature-title">照片墙</span>
         <span class="feature-desc">不止一张。把拍过的光、影和颜色摊开来看。</span>
         <span class="feature-foot">
-          <span class="feature-badge">即将上线</span>
+          <span class="feature-badge feature-badge--live">已上线</span>
           <span class="feature-arrow" aria-hidden="true">→</span>
         </span>
-      </button>
+      </a>
 
       <button class="feature-card" type="button" data-kind="changelog" data-feature="历次更新">
         <span class="feature-top">
@@ -171,15 +171,6 @@
 </main>
 
 <footer class="site-footer"><a class="footer-brand" href="#main">Folioverse<span class="brand-dot">.</span></a><p>把日子过成喜欢的样子。</p><span>© <span id="year">2026</span> 李伯檀</span></footer>
-
-<dialog class="dialog" id="coming-soon" aria-labelledby="dialog-title">
-  <div class="dialog-inner">
-    <span class="dialog-mark" aria-hidden="true">✳</span>
-    <h3 id="dialog-title">正在打磨中</h3>
-    <p>「<strong id="dialog-name">它</strong>」功能暂未上线，敬请期待哦。</p>
-    <form method="dialog"><button class="dialog-close" type="submit">知道啦</button></form>
-  </div>
-</dialog>
 
 <dialog class="dialog sheet" id="changelog" aria-labelledby="changelog-title">
   <div class="sheet-inner">

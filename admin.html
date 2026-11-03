@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f5f3ed" id="theme-color">
+<meta name="robots" content="noindex, nofollow">
+<title>写作后台 · Folioverse</title>
+<link rel="icon" href="./favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Noto+Serif+SC:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./style.css">
+<link rel="stylesheet" href="./pages.css">
+<script src="./common.js" defer></script>
+<script src="./admin.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">跳到主要内容</a>
+
+<header class="site-header">
+  <a class="brand" href="./index.html" aria-label="Folioverse 首页">
+    <span class="brand-mark">F</span>
+    <span>Folioverse<span class="brand-dot">.</span></span>
+  </a>
+  <nav class="nav-links" aria-label="主导航">
+    <a href="./index.html">首页</a>
+    <a href="./journal.html">日志</a>
+    <a href="./photos.html">照片墙</a>
+    <button class="theme-toggle" type="button" aria-label="切换深浅色模式" title="切换深浅色模式">
+      <span class="theme-icon" aria-hidden="true">◐</span>
+    </button>
+  </nav>
+</header>
+
+<main id="main">
+  <!-- 未登录 -->
+  <section id="login-view" hidden>
+    <form class="login-card" id="login-form">
+      <h1>写作后台</h1>
+      <p>只有你能进。输入密码开始写作。</p>
+      <input class="input" type="password" id="password" placeholder="管理员密码"
+             autocomplete="current-password" aria-label="管理员密码" required>
+      <button class="btn btn--primary" type="submit" id="login-btn" style="width:100%">进入</button>
+    </form>
+  </section>
+
+  <!-- 已登录 -->
+  <section id="app-view" hidden>
+    <div class="admin-wrap">
+      <div class="admin-head">
+        <div>
+          <h1>写作后台</h1>
+          <p>写点什么，或者挑几张照片放上去。</p>
+        </div>
+        <button class="btn btn--sm" type="button" id="logout">退出</button>
+      </div>
+
+      <div class="tabs" role="tablist" aria-label="后台分区">
+        <button type="button" role="tab" id="tab-btn-write" data-tab="write" aria-selected="true">写日志</button>
+        <button type="button" role="tab" id="tab-btn-posts" data-tab="posts" aria-selected="false">管理日志</button>
+        <button type="button" role="tab" id="tab-btn-photos" data-tab="photos" aria-selected="false">照片</button>
+      </div>
+
+      <!-- 写日志 -->
+      <section class="card" id="tab-write" role="tabpanel" aria-labelledby="tab-btn-write">
+        <div class="row row--between" style="margin-bottom:18px">
+          <div class="segmented" role="group" aria-label="日志类型">
+            <button type="button" data-type="article" aria-pressed="true">长文</button>
+            <button type="button" data-type="note" aria-pressed="false">随笔</button>
+          </div>
+          <button class="btn btn--sm" type="button" id="toggle-preview" aria-pressed="false">预览</button>
+        </div>
+
+        <div class="field" id="title-field">
+          <label for="post-title">标题</label>
+          <input class="input" id="post-title" placeholder="给这一篇起个名字">
+        </div>
+
+        <div class="field">
+          <label for="post-body">正文</label>
+          <textarea class="textarea" id="post-body" placeholder="想说什么就写什么……"></textarea>
+          <p class="hint">支持少量 Markdown：# 标题　**加粗**　*斜体*　`代码`　&gt; 引用　- 列表　[链接](地址)</p>
+        </div>
+
+        <div class="preview-box md" id="preview" hidden></div>
+
+        <div class="row row--between" style="margin-top:18px">
+          <span class="hint" id="save-hint"></span>
+          <div class="row">
+            <button class="btn" type="button" id="reset-editor">清空</button>
+            <button class="btn" type="button" id="save-draft">存为草稿</button>
+            <button class="btn btn--primary" type="button" id="publish">发布</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- 管理日志 -->
+      <section class="card" id="tab-posts" role="tabpanel" aria-labelledby="tab-btn-posts" hidden>
+        <ul class="admin-list" id="admin-posts"></ul>
+        <p class="hint" id="posts-empty" hidden>还没有写过东西。</p>
+      </section>
+
+      <!-- 照片 -->
+      <section class="card" id="tab-photos" role="tabpanel" aria-labelledby="tab-btn-photos" hidden>
+        <label class="drop" id="drop">
+          点击选择图片，或把图片拖到这里
+          <input type="file" id="file-input" accept="image/*" multiple hidden>
+        </label>
+        <p class="hint">图片会先在浏览器里缩到长边 2000px 再上传，省流量也省服务器空间。单张上限 15MB。</p>
+
+        <div class="field" style="margin-top:18px">
+          <label for="photo-caption">这组照片的说明（可选，会写进每张的配文）</label>
+          <input class="input" id="photo-caption" placeholder="比如：东湖岸边，秋天">
+        </div>
+
+        <p class="hint" id="upload-status"></p>
+        <div class="thumb-grid" id="thumbs"></div>
+
+        <div class="row" style="margin-top:18px">
+          <button class="btn btn--sm" type="button" id="refresh-photos">刷新列表</button>
+        </div>
+      </section>
+    </div>
+  </section>
+</main>
+</body>
+</html>
