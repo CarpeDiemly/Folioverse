@@ -1,37 +1,70 @@
 # Folioverse
 
-李伯檀的个人网站，部署在 GitHub Pages，并绑定自定义域名 `www.folioverse.cn`。
+李伯檀的个人网站。一个静态首页 + 一套轻量博客后端，可以自己写日志、传照片。
 
-整个站点是**单页**的：一个 `index.html` 承载全部内容，不构建、不依赖框架。
+## 页面
 
-## 页面构成
+| 页面 | 说明 |
+|---|---|
+| `index.html` | 首页。实时北京时间 + 访客所在地天气，三张功能入口卡片，拾光与关于 |
+| `journal.html` | 日志列表 / 详情。长文与随笔混排，按时间倒序 |
+| `photos.html` | 照片墙。瀑布流 + 灯箱 |
+| `admin.html` | 写作后台。密码登录，写日志、传照片 |
 
-- **实时信息条**：北京时间（精确到秒）+ 访问者 IP 所在城市与当地天气。
-  - 定位：`ipwho.is` → `api.ip.sb` → `ipinfo.io`（依次兜底）
-  - 中文地名：`api.bigdatacloud.net` 逆地理编码，失败时用内置城市字典
-  - 天气：`api.open-meteo.com`（WMO 天气代码转中文描述）
-- **首屏**：标题、简介、水墨感主图。
-- **小站的其他角落**：三个功能入口。
-  - **历次更新**：已上线，点击弹出时间线面板，内容来自 `script.js` 顶部的 `CHANGELOG` 数组。发版时在最前面加一条即可（数组第一项会自动标成「最新」）。
-  - **我的日志**、**照片墙**：目前是占位，点击弹出「功能暂未上线，敬请期待哦」。
-- **拾光**：精选照片 + 引言卡片。
-- **关于**：自我介绍。
-- **深浅色模式**：手动切换后记忆在 `localStorage`，未切换时跟随系统偏好。
+## 技术形态
+
+- **前端**：手写 HTML / CSS / 原生 JS，无框架、无构建步骤
+- **后端**：Node.js 原生 `http` + 内置 `node:sqlite`，**零第三方依赖**，不需要 `npm install`
+- **图片**：上传前在浏览器里缩到长边 2000px 并转 WebP，服务端只存文件
+
+接口都在 `/api/` 下，图片通过 `/media/<文件名>` 提供。
+
+## 快速开始
+
+需要 Node.js 22.5+（推荐 24 LTS）：
+
+```bash
+node server/index.js
+```
+
+首次启动会自动生成管理员密码并打印在控制台。然后访问：
+
+- 首页 <http://localhost:3000/>
+- 后台 <http://localhost:3000/admin.html>
+
+详细部署（服务器、nginx、HTTPS、备案、备份）见 [DEPLOY.md](./DEPLOY.md)。
 
 ## 项目结构
 
-- `index.html`：唯一页面。
-- `style.css`：全部样式（变量集中在 `:root`，深色模式为 `body.dark`）。
-- `script.js`：时钟、定位天气、占位弹窗、主题与滚动动效。
-- `favicon.svg`：站点图标。
-- `materials/images/`：页面素材。
-- `CNAME`：GitHub Pages 自定义域名配置。
-
-## 本地预览
-
-`script.js` 里调用了几个 HTTPS 接口，直接用 `file://` 打开时部分浏览器会因 CORS 拦截天气请求。建议起一个本地静态服务器：
-
-```bash
-python -m http.server 8000
-# 然后访问 http://localhost:8000
 ```
+index.html  style.css  script.js      首页
+journal.html  journal.js              日志
+photos.html   photos.js               照片墙
+admin.html    admin.js                写作后台
+common.js  pages.css                  子页共用的脚本与样式
+favicon.svg
+materials/images/                     首页用的图片素材
+
+server/
+  index.js        服务入口：静态文件 + 路由分发
+  api.js          接口实现
+  db.js           SQLite 表结构与查询
+  auth.js         密码、session、登录限流
+  markdown.js     Markdown 渲染（先转义，防 XSS）
+  rerender.js     渲染器变更后刷新旧文章
+  set-password.js 改管理员密码
+
+data/            运行时数据，已 gitignore
+```
+
+## 几个设计取舍
+
+- **零依赖**：不需要 `npm install`，不用担心供应链和原生模块编译，拷过去就能跑。
+- **SQLite 而不是 MySQL**：只有一个作者，SQLite 足够，还省下几百 MB 内存。
+- **图片在浏览器端压缩**：省服务器 CPU，也省用户上传流量。原图不上传，需要存档的话自行留底。
+- **正文存两份**：`body_md` 存源码，`body_html` 存渲染结果。将来换渲染器只跑一次 `rerender.js`。
+- **单管理员密码**：不做注册和用户表，减少攻击面。将来要多作者，把密码字段换成 users 表即可。
+
+## 历次更新
+
+首页「历次更新」卡片里的内容来自 `script.js` 顶部的 `CHANGELOG` 数组，发版时在最前面加一条，第一项会自动标成「最新」。

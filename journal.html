@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f5f3ed" id="theme-color">
+<meta name="description" content="Folioverse 的日志：长文与随笔。">
+<title>日志 · Folioverse</title>
+<link rel="icon" href="./favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Noto+Serif+SC:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./style.css">
+<link rel="stylesheet" href="./pages.css">
+<script src="./common.js" defer></script>
+<script src="./journal.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">跳到主要内容</a>
+
+<header class="site-header">
+  <a class="brand" href="./index.html" aria-label="Folioverse 首页">
+    <span class="brand-mark">F</span>
+    <span>Folioverse<span class="brand-dot">.</span></span>
+  </a>
+  <nav class="nav-links" aria-label="主导航">
+    <a href="./index.html">首页</a>
+    <a href="./journal.html" aria-current="page">日志</a>
+    <a href="./photos.html">照片墙</a>
+    <button class="theme-toggle" type="button" aria-label="切换深浅色模式" title="切换深浅色模式">
+      <span class="theme-icon" aria-hidden="true">◐</span>
+    </button>
+  </nav>
+</header>
+
+<main id="main" class="page">
+  <section id="list-view">
+    <div class="page-head">
+      <p class="eyebrow">JOURNAL</p>
+      <h1 class="page-title">日志</h1>
+      <p class="page-sub">长一点的心事写成文章，短一点的念头随手记下。都按时间倒着排。</p>
+      <div class="chips" role="group" aria-label="按类型筛选">
+        <button class="chip" type="button" data-filter="all" aria-pressed="true">全部</button>
+        <button class="chip" type="button" data-filter="article" aria-pressed="false">长文</button>
+        <button class="chip" type="button" data-filter="note" aria-pressed="false">随笔</button>
+      </div>
+    </div>
+
+    <ol class="entries" id="entries"></ol>
+    <p class="loading" id="loading">正在读取…</p>
+    <p class="empty" id="empty" hidden>这里还空着，等第一句话落下来。</p>
+  </section>
+
+  <article class="post" id="detail-view" hidden>
+    <a class="page-back" href="./journal.html">← 回到日志</a>
+    <header class="post-head">
+      <h1 class="post-title" id="post-title"></h1>
+      <p class="post-meta" id="post-meta"></p>
+    </header>
+    <div class="post-body"><div class="md" id="post-body"></div></div>
+    <footer class="post-foot">
+      <a href="./journal.html">← 全部日志</a>
+      <span id="post-status"></span>
+    </footer>
+  </article>
+</main>
+
+<footer class="site-footer">
+  <a class="footer-brand" href="./index.html">Folioverse<span class="brand-dot">.</span></a>
+  <p>把日子过成喜欢的样子。</p>
+  <span>© <span id="year">2026</span> 李伯檀 · <a class="foot-admin" href="./admin.html">写作后台</a></span>
+</footer>
+</body>
+</html>

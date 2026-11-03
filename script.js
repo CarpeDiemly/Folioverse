@@ -213,6 +213,18 @@
   // 更新手记。发版时在最前面加一条即可（数组第一项会被标成「最新」）。
   const CHANGELOG = [
     {
+      version: 'v0.5',
+      date: '2026.11.03',
+      iso: '2026-11-03',
+      title: '能写日志了',
+      notes: [
+        '加了写作后台：密码登录，写长文或随笔，也能先存草稿',
+        '照片墙上线，图片在浏览器里先压缩再上传，省流量也省空间',
+        '首页三张卡片接上了真实页面',
+        '后端零第三方依赖，一台装了 Node 的机器就能跑起来'
+      ]
+    },
+    {
       version: 'v0.4',
       date: '2026.11.03',
       iso: '2026-11-03',
@@ -258,29 +270,16 @@
     }
   ];
 
-  const dialog = $('coming-soon');
-  const dialogName = $('dialog-name');
   const changelogDialog = $('changelog');
   const timeline = $('timeline');
 
-  function showDialog(target) {
-    if (!target) return;
-    if (typeof target.showModal === 'function') {
-      if (!target.open) target.showModal();
-    } else {
-      target.setAttribute('open', '');
-    }
-  }
-
-  function openComingSoon(name) {
-    if (!dialog) return;
-    if (dialogName) dialogName.textContent = name;
-    showDialog(dialog);
-  }
-
   function openChangelog() {
     if (!changelogDialog) return;
-    showDialog(changelogDialog);
+    if (typeof changelogDialog.showModal === 'function') {
+      if (!changelogDialog.open) changelogDialog.showModal();
+    } else {
+      changelogDialog.setAttribute('open', '');
+    }
     // 每次打开都从最新一条开始看
     const body = changelogDialog.querySelector('.sheet-body');
     if (body) body.scrollTop = 0;
@@ -337,22 +336,19 @@
   renderChangelog();
 
   document.querySelectorAll('.feature-card').forEach((card) => {
-    card.addEventListener('click', () => {
-      if (card.dataset.kind === 'changelog') openChangelog();
-      else openComingSoon(card.dataset.feature);
-    });
+    if (card.dataset.kind !== 'changelog') return;   // 日志和照片墙是真链接，交给浏览器跳转
+    card.addEventListener('click', () => openChangelog());
   });
 
-  // 两个弹窗共用的关闭行为：点遮罩、点关闭按钮
-  [dialog, changelogDialog].forEach((target) => {
-    if (!target) return;
-    target.addEventListener('click', (event) => {
-      if (event.target === target) target.close();
+  // 点遮罩、点关闭按钮都能关掉更新面板
+  if (changelogDialog) {
+    changelogDialog.addEventListener('click', (event) => {
+      if (event.target === changelogDialog) changelogDialog.close();
     });
-    target.querySelectorAll('[data-close]').forEach((button) => {
-      button.addEventListener('click', () => target.close());
+    changelogDialog.querySelectorAll('[data-close]').forEach((button) => {
+      button.addEventListener('click', () => changelogDialog.close());
     });
-  });
+  }
 
   /* ---------- 4. 深浅色主题 ---------- */
   const themeButton = document.querySelector('.theme-toggle');
