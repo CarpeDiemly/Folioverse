@@ -1,14 +1,199 @@
 <!doctype html>
 <html lang="zh-CN">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="refresh" content="0; url=./html/">
-  <link rel="canonical" href="https://www.folioverse.cn/html/">
-  <title>正在前往 Folioverse</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f5f3ed" id="theme-color">
+<meta name="description" content="Folioverse，李伯檀的个人角落。收集风景、灵感与日常。">
+<title>Folioverse · 李伯檀的个人角落</title>
+
+<link rel="icon" href="./favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://www.folioverse.cn/">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Folioverse">
+<meta property="og:title" content="Folioverse · 李伯檀的个人角落">
+<meta property="og:description" content="收集风景、灵感与日常。">
+<meta property="og:url" content="https://www.folioverse.cn/">
+<meta property="og:image" content="https://www.folioverse.cn/materials/images/东湖岸花-水墨.jpg">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Noto+Serif+SC:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./style.css">
+<script src="./script.js" defer></script>
 </head>
 <body>
-  <p>正在前往 Folioverse…如果没有自动跳转，请<a href="./html/">点击这里</a>。</p>
-  <script>window.location.replace('./html/');</script>
+<a class="skip-link" href="#main">跳到主要内容</a>
+
+<header class="site-header">
+  <a class="brand" href="#main" aria-label="Folioverse 首页">
+    <span class="brand-mark">F</span>
+    <span>Folioverse<span class="brand-dot">.</span></span>
+  </a>
+  <nav class="nav-links" aria-label="主导航">
+    <a href="#features">角落</a>
+    <a href="#moments">拾光</a>
+    <a href="#about">关于</a>
+    <button class="theme-toggle" type="button" aria-label="切换深浅色模式" title="切换深浅色模式">
+      <span class="theme-icon" aria-hidden="true">◐</span>
+    </button>
+  </nav>
+</header>
+
+<!-- 实时信息条：北京时间 + 访问者位置与天气，全部由 script.js 填充 -->
+<div class="livebar">
+  <div class="livebar-inner">
+    <div class="livebar-time">
+      <span class="live-dot" aria-hidden="true"></span>
+      <span class="live-tag">北京时间</span>
+      <time class="live-clock" id="clock">
+        <span class="live-date" id="clock-date">正在读取日期…</span>
+        <span class="live-time" id="clock-time">--:--:--</span>
+      </time>
+    </div>
+    <div class="livebar-weather" id="weather" data-state="loading" title="根据你的 IP 估算">
+      <svg class="icon-pin" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s6.4-5.4 6.4-10.4a6.4 6.4 0 1 0-12.8 0C5.6 15.6 12 21 12 21Z"/><circle cx="12" cy="10.4" r="2.3"/></svg>
+      <span class="weather-city" id="weather-city">定位中</span>
+      <span class="weather-sep" aria-hidden="true">·</span>
+      <span class="weather-icon" id="weather-icon" aria-hidden="true"></span>
+      <span class="weather-desc" id="weather-desc">天气获取中</span>
+      <span class="weather-temp" id="weather-temp"></span>
+    </div>
+  </div>
+</div>
+
+<noscript><style>.livebar{display:none}</style></noscript>
+
+<main id="main" tabindex="-1">
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-copy">
+      <p class="eyebrow"><span class="eyebrow-line"></span> A LITTLE CORNER OF THE INTERNET</p>
+      <h1 id="hero-title">你好，<br>欢迎来到<br><span>我的小宇宙。</span></h1>
+      <p class="hero-intro">这里收藏一些日常里遇见的风景、念头，<br class="desktop-break">还有那些值得慢下来感受的片刻。</p>
+      <a class="text-link" href="#features">往下逛逛 <span aria-hidden="true">↓</span></a>
+    </div>
+    <figure class="hero-image">
+      <img src="./materials/images/东湖岸花-水墨.jpg" width="1152" height="864" alt="东湖岸边的花木与水墨般的湖景" fetchpriority="high" decoding="async">
+      <figcaption><span>01 / 片刻收藏</span><span>东湖岸边</span></figcaption>
+    </figure>
+    <span class="hero-index" aria-hidden="true">F / 01</span>
+  </section>
+
+  <section class="features section-wrap" id="features" aria-labelledby="features-title">
+    <div class="section-heading">
+      <div><p class="eyebrow">A FEW DOORS TO OPEN</p><h2 id="features-title">小站的其他角落</h2></div>
+      <p class="section-note">有几扇门还在装修，<br>不过可以先来敲一敲。</p>
+    </div>
+
+    <div class="feature-grid reveal">
+      <button class="feature-card" type="button" data-kind="journal" data-feature="我的日志">
+        <span class="feature-top">
+          <span class="feature-no">01</span>
+          <svg class="feature-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <rect x="5" y="3.2" width="14" height="17.6" rx="1.8"/>
+            <path d="M9.2 3.2v17.6"/>
+            <path d="M12.4 8h3.6M12.4 12h3.6M12.4 16h2.2"/>
+          </svg>
+        </span>
+        <span class="feature-title">我的日志</span>
+        <span class="feature-desc">更长的句子、更慢的心情，都放在这里。</span>
+        <span class="feature-foot">
+          <span class="feature-badge">即将上线</span>
+          <span class="feature-arrow" aria-hidden="true">→</span>
+        </span>
+      </button>
+
+      <button class="feature-card" type="button" data-kind="photos" data-feature="照片墙">
+        <span class="feature-top">
+          <span class="feature-no">02</span>
+          <svg class="feature-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <rect x="3.6" y="4.4" width="7.2" height="7.2" rx="1.2"/>
+            <rect x="13.2" y="4.4" width="7.2" height="7.2" rx="1.2"/>
+            <rect x="3.6" y="14" width="7.2" height="7.2" rx="1.2"/>
+            <rect x="13.2" y="14" width="7.2" height="7.2" rx="1.2"/>
+          </svg>
+        </span>
+        <span class="feature-title">照片墙</span>
+        <span class="feature-desc">不止一张。把拍过的光、影和颜色摊开来看。</span>
+        <span class="feature-foot">
+          <span class="feature-badge">即将上线</span>
+          <span class="feature-arrow" aria-hidden="true">→</span>
+        </span>
+      </button>
+
+      <button class="feature-card" type="button" data-kind="changelog" data-feature="历次更新">
+        <span class="feature-top">
+          <span class="feature-no">03</span>
+          <svg class="feature-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="8.4"/>
+            <path d="M12 7.2V12l3.2 1.9"/>
+          </svg>
+        </span>
+        <span class="feature-title">历次更新</span>
+        <span class="feature-desc">这个站怎么长成现在这样，一次一次记下来。</span>
+        <span class="feature-foot">
+          <span class="feature-badge feature-badge--live">已上线</span>
+          <span class="feature-arrow" aria-hidden="true">→</span>
+        </span>
+      </button>
+    </div>
+  </section>
+
+  <section class="moments section-wrap" id="moments" aria-labelledby="moments-title">
+    <div class="section-heading">
+      <div><p class="eyebrow">A FEW THINGS I KEEP</p><h2 id="moments-title">最近收藏的片刻</h2></div>
+      <p class="section-note">生活不必总是赶路，<br>有时停下来看看也很好。</p>
+    </div>
+    <div class="gallery reveal">
+      <figure class="gallery-card gallery-card-large">
+        <img src="./materials/images/东湖岸花.jpg" width="1711" height="1280" alt="东湖岸边盛开的花与湖水" loading="lazy" decoding="async">
+        <figcaption><span>湖岸边的春意</span><span>01</span></figcaption>
+      </figure>
+      <article class="quote-card">
+        <span class="quote-mark" aria-hidden="true">“</span>
+        <blockquote>如果你来访我，我不在，请和我门外的花坐一会儿。</blockquote>
+        <p>留给路过的你</p>
+        <span class="quote-flower" aria-hidden="true">✳</span>
+      </article>
+    </div>
+  </section>
+
+  <section class="about section-wrap" id="about" aria-labelledby="about-title">
+    <div class="about-stamp" aria-hidden="true">F<br><span>·</span></div>
+    <div class="about-copy reveal"><p class="eyebrow">A NOTE ABOUT THIS PLACE</p><h2 id="about-title">关于这里</h2>
+      <p>我是李伯檀。Folioverse 是我为自己搭建的一方小天地，想把喜欢的风景、正在思考的事，以及生活里闪闪发亮的小片段，慢慢放在这里。</p>
+      <p class="about-signoff">谢谢你来，愿你也找到一个舒服的角落。</p>
+      <p class="about-meta">单页站点 <span aria-hidden="true">·</span> 手写 HTML / CSS / JS <span aria-hidden="true">·</span> 持续更新</p>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer"><a class="footer-brand" href="#main">Folioverse<span class="brand-dot">.</span></a><p>把日子过成喜欢的样子。</p><span>© <span id="year">2026</span> 李伯檀</span></footer>
+
+<dialog class="dialog" id="coming-soon" aria-labelledby="dialog-title">
+  <div class="dialog-inner">
+    <span class="dialog-mark" aria-hidden="true">✳</span>
+    <h3 id="dialog-title">正在打磨中</h3>
+    <p>「<strong id="dialog-name">它</strong>」功能暂未上线，敬请期待哦。</p>
+    <form method="dialog"><button class="dialog-close" type="submit">知道啦</button></form>
+  </div>
+</dialog>
+
+<dialog class="dialog sheet" id="changelog" aria-labelledby="changelog-title">
+  <div class="sheet-inner">
+    <header class="sheet-head">
+      <div>
+        <p class="eyebrow">CHANGELOG</p>
+        <h3 id="changelog-title">历次更新</h3>
+      </div>
+      <button class="sheet-close" type="button" data-close aria-label="关闭更新记录">✕</button>
+    </header>
+    <div class="sheet-body">
+      <ol class="timeline" id="timeline"></ol>
+    </div>
+  </div>
+</dialog>
 </body>
 </html>
